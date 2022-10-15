@@ -1,0 +1,14 @@
+# ! Fetch this yourself, via https://scryfall.com/docs/api/bulk-data
+# ? Currently not being used
+sample/scryfall/scryfall_bulk.json
+
+# The buylist price information
+data/*/script.csv
+
+# This script will come later, just not now
+scripts/data_storing
+
+# Logging files, pycache, etc
+logs/*
+__pycache__
+*/__pycache__

@@ -1,0 +1,121 @@
+{
+    "object": "card",
+    "id": "870fb793-3107-4cb2-ba78-34fbf5c9da2f",
+    "oracle_id": "7dde4eb6-e9d7-4259-abc2-3af738e0f00f",
+    "multiverse_ids": [
+      24587
+    ],
+    "mtgo_id": 14289,
+    "mtgo_foil_id": 14290,
+    "tcgplayer_id": 7306,
+    "cardmarket_id": 3928,
+    "name": "Foil",
+    "lang": "en",
+    "released_at": "2000-06-05",
+    "uri": "https://api.scryfall.com/cards/870fb793-3107-4cb2-ba78-34fbf5c9da2f",
+    "scryfall_uri": "https://scryfall.com/card/pcy/34/foil?utm_source=api",
+    "layout": "normal",
+    "highres_image": true,
+    "image_status": "highres_scan",
+    "image_uris": {
+      "small": "https://cards.scryfall.io/small/front/8/7/870fb793-3107-4cb2-ba78-34fbf5c9da2f.jpg?1562920018",
+      "normal": "https://cards.scryfall.io/normal/front/8/7/870fb793-3107-4cb2-ba78-34fbf5c9da2f.jpg?1562920018",
+      "large": "https://cards.scryfall.io/large/front/8/7/870fb793-3107-4cb2-ba78-34fbf5c9da2f.jpg?1562920018",
+      "png": "https://cards.scryfall.io/png/front/8/7/870fb793-3107-4cb2-ba78-34fbf5c9da2f.png?1562920018",
+      "art_crop": "https://cards.scryfall.io/art_crop/front/8/7/870fb793-3107-4cb2-ba78-34fbf5c9da2f.jpg?1562920018",
+      "border_crop": "https://cards.scryfall.io/border_crop/front/8/7/870fb793-3107-4cb2-ba78-34fbf5c9da2f.jpg?1562920018"
+    },
+    "mana_cost": "{2}{U}{U}",
+    "cmc": 4.0,
+    "type_line": "Instant",
+    "oracle_text": "You may discard an Island card and another card rather than pay this spell's mana cost.\nCounter target spell.",
+    "colors": [
+      "U"
+    ],
+    "color_identity": [
+      "U"
+    ],
+    "keywords": [
+  
+    ],
+    "legalities": {
+      "standard": "not_legal",
+      "future": "not_legal",
+      "historic": "not_legal",
+      "gladiator": "not_legal",
+      "pioneer": "not_legal",
+      "explorer": "not_legal",
+      "modern": "not_legal",
+      "legacy": "legal",
+      "pauper": "legal",
+      "vintage": "legal",
+      "penny": "not_legal",
+      "commander": "legal",
+      "brawl": "not_legal",
+      "historicbrawl": "not_legal",
+      "alchemy": "not_legal",
+      "paupercommander": "legal",
+      "duel": "legal",
+      "oldschool": "not_legal",
+      "premodern": "legal"
+    },
+    "games": [
+      "paper",
+      "mtgo"
+    ],
+    "reserved": false,
+    "foil": true,
+    "nonfoil": true,
+    "finishes": [
+      "nonfoil",
+      "foil"
+    ],
+    "oversized": false,
+    "promo": false,
+    "reprint": false,
+    "variation": false,
+    "set_id": "c233bd36-57c0-4aa2-ae6c-7aeabfb4e3ce",
+    "set": "pcy",
+    "set_name": "Prophecy",
+    "set_type": "expansion",
+    "set_uri": "https://api.scryfall.com/sets/c233bd36-57c0-4aa2-ae6c-7aeabfb4e3ce",
+    "set_search_uri": "https://api.scryfall.com/cards/search?order=set&q=e%3Apcy&unique=prints",
+    "scryfall_set_uri": "https://scryfall.com/sets/pcy?utm_source=api",
+    "rulings_uri": "https://api.scryfall.com/cards/870fb793-3107-4cb2-ba78-34fbf5c9da2f/rulings",
+    "prints_search_uri": "https://api.scryfall.com/cards/search?order=released&q=oracleid%3A7dde4eb6-e9d7-4259-abc2-3af738e0f00f&unique=prints",
+    "collector_number": "34",
+    "digital": false,
+    "rarity": "uncommon",
+    "card_back_id": "0aeebaf5-8c7d-4636-9e82-8c27447861f7",
+    "artist": "Bradley Williams",
+    "artist_ids": [
+      "24d81dfa-3745-4386-93f8-7e67dddb3c8a"
+    ],
+    "illustration_id": "2f066cbe-97da-42bd-8202-6b3f9c00f22e",
+    "border_color": "black",
+    "frame": "1997",
+    "full_art": false,
+    "textless": false,
+    "booster": true,
+    "story_spotlight": false,
+    "edhrec_rank": 2693,
+    "prices": {
+      "usd": "1.08",
+      "usd_foil": "44.99",
+      "usd_etched": null,
+      "eur": "0.42",
+      "eur_foil": "28.00",
+      "tix": null
+    },
+    "related_uris": {
+      "gatherer": "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=24587",
+      "tcgplayer_infinite_articles": "https://infinite.tcgplayer.com/search?contentMode=article&game=magic&partner=scryfall&q=Foil&utm_campaign=affiliate&utm_medium=api&utm_source=scryfall",
+      "tcgplayer_infinite_decks": "https://infinite.tcgplayer.com/search?contentMode=deck&game=magic&partner=scryfall&q=Foil&utm_campaign=affiliate&utm_medium=api&utm_source=scryfall",
+      "edhrec": "https://edhrec.com/route/?cc=Foil"
+    },
+    "purchase_uris": {
+      "tcgplayer": "https://www.tcgplayer.com/product/7306?page=1&utm_campaign=affiliate&utm_medium=api&utm_source=scryfall",
+      "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Search?referrer=scryfall&searchString=Foil&utm_campaign=card_prices&utm_medium=text&utm_source=scryfall",
+      "cardhoarder": "https://www.cardhoarder.com/cards/14289?affiliate_id=scryfall&ref=card-profile&utm_campaign=affiliate&utm_medium=card&utm_source=scryfall"
+    }
+  }
