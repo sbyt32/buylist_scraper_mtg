@@ -12,3 +12,4 @@ scripts/data_storing
 logs/*
 __pycache__
 */__pycache__
+sample.html

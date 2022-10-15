@@ -1,22 +1,62 @@
+import csv
 import logging
+import scripts.settings as settings
+from scripts.define_sets import create_and_define_sets
+from scripts.request_wrapper import _send_request
+from scripts.abu_scripts.add_cards import store_data
+log = logging.getLogger()
 
-def store_data(abu_data, writer):
-    # Process response
+def scrape_abu():
+    # *Locate the sets, first. 
+    sets = create_and_define_sets('abu')
 
-    for cardInfo in abu_data['grouped']['product_id']['groups']:
-        # This grabs the section that each card has it's buylisting and identification.
+    with open('data/abu/script.csv', 'w', newline='') as imported_data:
+        writer = csv.writer(imported_data, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(settings.CARD_BUYLIST_INFO)
+        log.info('Opening the file ./data/abu/script.csv ...')
 
-        cardInfo = cardInfo['doclist']['docs'][0]
-        # ? If the card is foil, use the same format as coolstuffinc
-        if 'Foil' in cardInfo['card_style']:
-            foil = "yes"
-        else:
-            foil = "no"
-        # ? Some older sets don't have card_numbers, but scryfall does. We can transform this data later, maybe?
-        try:
-            card_num = cardInfo['card_number']
-        except KeyError:
-            card_num = ""
+    # * Begin loop
+    # * For every set in the set_file...
+        for set in sets:
+            set = set.strip('\n')
+            # * Prepare request
+            params = {
+                    "facet.field":["magic_edition","rarity","buy_price","trade_price","language","card_style"],
+                    "facet.mincount":"1",
+                    "facet.limit":"-1",
+                    "facet":"on",
+                    "indent":"on",
+                    "q":"*:*",
+                    "fq":   [
+                        "-buy_price:0 -buy_list_quantity:0 -magic_features:(\"Actual Picture Card\") +display_title:*",
+                        "category:\"Magic the Gathering Singles\"",
+                        "language:(\"English\")",
+                        "-condition:(\"PLD\",\"HP\",\"SP\",\"MINT\")"
+                        f"magic_edition:(\"{set}\")",
+                        ],
+                    "sort":"magic_edition_sort asc,display_title asc",
+                    "fl":"id,artist,card_style,language,layout,magic_edition,magic_edition_sort,category,multiverseid,title,product_id,display_title,simple_title,price,quantity,buy_list_quantity,buy_price,trade_price,condition,production_status,card_number",
+                    "group":"true",
+                    "group.field":"product_id",
+                    "group.ngroups":"true",
+                    "group.limit":"10",
+                    "start":"0",
+                    # ! Consider NOT doing >= 1000 (You broke the fucking website :skull:)
+                    "rows":"999",
+                    "wt":"json"
+                    }
+            url = "https://data.abugames.com/solr/nodes/select"
 
-        # This should be a csv.writer.
-        writer.writerow([cardInfo['simple_title'], card_num, cardInfo['magic_edition_sort'], foil, cardInfo['buy_price'], cardInfo['trade_price']])
+            # * Send request
+            r = _send_request('GET', url, params=params)
+
+            # * Process response
+            # * Check if empty.
+            if r['grouped']['product_id']['groups'] == []:
+                log.error(f'The set "{set}" does not work or has no data!')
+                continue
+
+            # scripts.abu(r,writer)
+            store_data(r, writer)
+            
+    imported_data.close()
