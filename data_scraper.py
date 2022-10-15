@@ -208,15 +208,15 @@ def scrape_csi():
             scripts.csi(r, writer, set)
     imported_data.close()
 
-scrape_ck()
+# scrape_ck()
 
-# for site in sites_to_scrape:
-#     log.info(f'Running scrape for {site} ...')
-#     if site == 'abu':
-#         scrape_abu()
-#     elif site == 'csi':
-#         scrape_csi()
-#     elif site == 'ck':
-#         scrape_ck()
-    # ...
+for site in sites_to_scrape:
+    log.info(f'Running scrape for {site} ...')
+    if site == 'abu':
+        scrape_abu()
+    elif site == 'csi':
+        scrape_csi()
+    elif site == 'ck':
+        scrape_ck()
+    ...
 # log.info("Parsed all of the items!") # ? mmmm filler info, replace with something good maybe
