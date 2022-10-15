@@ -67,7 +67,7 @@ def create_and_define_sets(site):
         # * Get the list of sets and close the file, then return it.
         sets = setList.readlines()
         setList.close()
-        return sets[:2]
+        return sets[:10]
 
 # AlphaBetaUnlimitedGames, aka ABUGames
 def scrape_abu():
@@ -144,19 +144,28 @@ def scrape_ck():
         for set in sets:
             page = 1
             r = scripts.ck_request_data(set, page)
-            s = scripts.ck_parse_data(r, writer)
+            if r.status_code == 400:
+                log.error('400 Request Header or Cookie Too Large! This might happen if you request too fast.')
+                print(r.headers)
+                print(r.cookies)
+                break
+            print(set)
+            print(r.headers)
+            print('\n')
+            print(r.cookies)
+            s = scripts.ck_parse_data(r.text, writer)
             # * Sleep here, because I have to do this slowly or the site might get angry at me :(
-            sleep(1.5)
+            sleep(.8)
             # * If there is more pages, go run this again.
             # ? Because I have to load the page and parse the data first, this needs to be like this (I think)
             while scripts.ck_next(s) is True:
                 page += 1
                 r = scripts.ck_request_data(set, page)
-                s = scripts.ck_parse_data(r, writer)
-                sleep(1.5)
+                s = scripts.ck_parse_data(r.text, writer)
+                sleep(.8)
 
     imported_data.close()
-    scripts.ck_close()
+    # scripts.ck_close()
 
 # CoolStuffInc
 def scrape_csi():
@@ -199,13 +208,15 @@ def scrape_csi():
             scripts.csi(r, writer, set)
     imported_data.close()
 
-# scrape_csi()
 scrape_ck()
+
 # for site in sites_to_scrape:
 #     log.info(f'Running scrape for {site} ...')
 #     if site == 'abu':
 #         scrape_abu()
 #     elif site == 'csi':
 #         scrape_csi()
-#     # ...
+#     elif site == 'ck':
+#         scrape_ck()
+    # ...
 # log.info("Parsed all of the items!") # ? mmmm filler info, replace with something good maybe

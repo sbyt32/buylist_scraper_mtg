@@ -35,11 +35,14 @@ def request_data(set:str, page:int):
         "filter[singles]":"1",
         "page":f"{page}"
     }
+
     log.debug(f'Sending request.get to https://www.cardkingdom.com/purchasing/mtg_singles with params:\n{queryString}')
     r = session.get('https://www.cardkingdom.com/purchasing/mtg_singles', params=queryString)
-    if r.status_code == 400:
-        log.error('400 Request Header or Cookie Too Large! This might happen if you request too fast.')
-    return r.text
+
+    # ? I have to clear this because I need to be able to make sure this cookie doesn't get huge
+    session.cookies.clear('www.cardkingdom.com', '/', 'sigt')
+
+    return r
 
 def parse_cards(r:str, writer):
     # ? This should be done somewhere else, maybe.
@@ -65,8 +68,8 @@ def parse_cards(r:str, writer):
             "",                                         # Collector Number
             set.rstrip(),                               # Set
             foil,                                       # Foil Property
-            float(card_usd[x].text.replace('$', '')),   # Buylist Price, in USD
-            float(card_cred[x].text.replace('$', '')),  # Buylist Price, in store credit (if supported)
+            float(re.sub('[$,]', '',card_usd[x].text)), # Buylist Price, in USD
+            float(re.sub('[$,]', '',card_usd[x].text)), # Buylist Price, in store credit (if supported)
         ]
         writer.writerow(cardBuylistData)
     return searching
