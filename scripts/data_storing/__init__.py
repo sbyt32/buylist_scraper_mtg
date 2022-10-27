@@ -1,0 +1,2 @@
+from scripts.data_storing.store_full_resp import store_response as data_store_resp
+from scripts.data_storing.store_headers_cookies import store_headers_cookies as data_store_headers_cookies

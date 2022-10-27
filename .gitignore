@@ -1,14 +1,25 @@
-# ! Fetch this yourself, via https://scryfall.com/docs/api/bulk-data
-# ? Currently not being used
-sample/scryfall/scryfall_bulk.json
 
+
+# * DATA
 # The buylist price information
 data/*/script.csv
 
-# This script will come later, just not now
-scripts/data_storing
+# SF
+data/scryfall/scryfall_bulk.json
+data/scryfall/*.txt
+data/scryfall/*.csv
+
+# Set Information
+data/set_information/sets_info.json
+data/set_information/sets_to_fetch.txt
 
 # Logging files, pycache, etc
 logs/*
 __pycache__
 */__pycache__
+sample.html
+log_example.py
+sample/*
+combine.py
+/todo
+filler.py
