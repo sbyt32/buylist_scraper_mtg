@@ -1,14 +1,13 @@
 import csv
 import logging
-import scripts.settings as settings
-from scripts.define_sets import create_and_define_sets
-from scripts.request_wrapper import _send_request
-from scripts.abu_scripts.add_cards import store_data
+import scripts
+import scripts.misc.settings as settings
 log = logging.getLogger()
+
 
 def scrape_abu():
     # *Locate the sets, first. 
-    sets = create_and_define_sets('abu')
+    sets = scripts.misc_create_define_sets('abu')
 
     with open('data/abu/script.csv', 'w', newline='') as imported_data:
         writer = csv.writer(imported_data, delimiter=',', quoting=csv.QUOTE_MINIMAL)
@@ -48,15 +47,14 @@ def scrape_abu():
             url = "https://data.abugames.com/solr/nodes/select"
 
             # * Send request
-            r = _send_request('GET', url, params=params)
-
+            data = scripts._send_request('GET', url, params=params)
             # * Process response
             # * Check if empty.
-            if r['grouped']['product_id']['groups'] == []:
+            if data['grouped']['product_id']['groups'] == []:
                 log.error(f'The set "{set}" does not work or has no data!')
                 continue
-
+            break
             # scripts.abu(r,writer)
-            store_data(r, writer)
+            # scripts.abu_store_data(data, writer)
             
     imported_data.close()

@@ -20,4 +20,4 @@ def create_and_define_sets(site):
         # * Get the list of sets and close the file, then return it.
         sets = setList.readlines()
         setList.close()
-        return sets[:5]
+        return sets

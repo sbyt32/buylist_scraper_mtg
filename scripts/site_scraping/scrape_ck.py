@@ -1,15 +1,15 @@
 import csv
 import requests
 import logging
-import scripts.ck_scripts as ck_scripts
-import scripts.settings as settings
+import scripts
+import scripts.site_scraping
+import scripts.misc.settings as settings
 from time import sleep
-from scripts.define_sets import create_and_define_sets
 log = logging.getLogger()
 
 def scrape_ck():
     # * Locate the sets, first.
-    sets = create_and_define_sets('ck')
+    sets = scripts.misc_create_define_sets('ck')
 
     with open('./data/ck/script.csv', 'w', newline='') as imported_data:
         writer = csv.writer(imported_data, delimiter=',', quoting=csv.QUOTE_MINIMAL)
@@ -18,25 +18,29 @@ def scrape_ck():
     
     # * Set Cookies, Headers, etc.
         session = requests.Session()
-        ck_scripts.get_cookies_header(session)
+        scripts.site_scraping.ck_get_cookies_header(session)
 
     # * Begin loop
     # * For every set in the set_file..
 
         for set in sets:
+            set = set.replace(" - ", " ").replace(" ", "-").lower().rstrip('\n')
             page = 1
-            r = ck_scripts.request_data(set, page, session)
+            # * Request Data
+            r = scripts.site_scraping.ck_request_data(set, page, session)
+
             if r.status_code == 400:
-                log.error('400 Request Header or Cookie Too Large! This might happen if you request too fast.')
+                log.error('400 Request Header or Cookie Too Large! Check if the cookies are too large?')
                 break
-            s = ck_scripts.parse_cards(r.text, writer)
+
+            s = scripts.site_scraping.ck_parse_cards(r.text, writer)
             # * Sleep here, because I have to do this slowly or the site might get angry at me :(
             sleep(.8)
             # * If there is more pages, go run this again.
-            while ck_scripts.next_page(s) is True:
+            while scripts.site_scraping.ck_next_page(s) is True:
                 page += 1
-                r = ck_scripts.request_data(set, page, session)
-                s = ck_scripts.parse_cards(r.text, writer)
+                r = scripts.site_scraping.ck_request_data(set, page, session)
+                s = scripts.site_scraping.ck_parse_cards(r.text, writer)
                 sleep(.8)
 
         session.close()

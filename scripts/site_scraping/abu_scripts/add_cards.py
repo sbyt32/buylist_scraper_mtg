@@ -16,7 +16,7 @@ def store_data(abu_data, writer):
         try:
             card_num = cardInfo['card_number']
         except KeyError:
-            card_num = ""
+            card_num = ''
 
         # This should be a csv.writer.
         writer.writerow([cardInfo['simple_title'], card_num, cardInfo['magic_edition_sort'], foil, cardInfo['buy_price'], cardInfo['trade_price']])

@@ -1,14 +1,14 @@
-import scripts.settings as settings
+import scripts
+import scripts.misc.settings as settings
+import scripts.site_scraping.csi_scripts
 import csv
 import logging
-log = logging.getLogger()
-from scripts.request_wrapper import _send_request
-from scripts.define_sets import create_and_define_sets
-from scripts.csi_scripts.add_cards import store_data
 from urllib.parse import quote
 
+log = logging.getLogger()
+
 def scrape_csi():
-    sets = create_and_define_sets('csi')
+    sets = scripts.misc_create_define_sets('csi')
 
     with open('./data/csi/script.csv', 'w', newline='') as imported_data:
         writer = csv.writer(imported_data, delimiter=',', quoting=csv.QUOTE_MINIMAL)
@@ -41,8 +41,8 @@ def scrape_csi():
             url = "https://www.coolstuffinc.com/ajax_buylist.php"
 
             # * Send request
-            r = _send_request('POST', url, data=params, headers=headers)
-
+            data = scripts._send_request('POST', url, data=params, headers=headers)
+            # * Store the Headers and Cookies, if needed
             # * Parse response, pass response, writer, and set name
-            store_data(r, writer, set)
+            scripts.site_scraping.csi_scripts.csi_store_cards(data,writer,set)
     imported_data.close()

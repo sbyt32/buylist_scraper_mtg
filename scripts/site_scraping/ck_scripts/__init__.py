@@ -1,0 +1,4 @@
+from scripts.site_scraping.ck_scripts.add_cards_ck import parse_cards as ck_parse_cards
+from scripts.site_scraping.ck_scripts.get_cookies_header_ck import get_cookies_header as ck_get_cookies_header
+from scripts.site_scraping.ck_scripts.next_page_ck import next_page as ck_next_page
+from scripts.site_scraping.ck_scripts.request_data_ck import request_data as ck_request_data
